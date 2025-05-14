@@ -1,0 +1,246 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  color: #222;
+}
+
+.header {
+  background: #002f34;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post-now-btn {
+  background: #ffce00;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.post-now-btn:hover {
+  background: #f7b500;
+  transform: scale(1.05);
+}
+
+.hero {
+  background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+  color: #004d40;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh; width: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content, .modal-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.categories button {
+  background: #00695c;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.categories button:hover:not(:disabled) {
+  background: #00897b;
+  transform: scale(1.05);
+}
+
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+}
+
+.modal-form h2, h3 {
+  margin-bottom: 1rem;
+}
+
+.modal-form form label {
+  display: block;
+  margin-top: 1rem;
+}
+
+.modal-form form input,
+.modal-form form textarea,
+.modal-form form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.change-btn {
+  margin-left: 1rem;
+  background: none;
+  border: none;
+  color: #00796b;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.post-btn {
+  margin-top: 2rem;
+  background: #ffce00;
+  padding: 0.7rem 2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.post-btn:hover {
+  background: #f7b500;
+  transform: scale(1.05);
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: #002f34;
+  color: white;
+  margin-top: 2rem;
+}
+.hero {
+  background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+  color: #004d40;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+}
+
+.hero-text {
+  flex: 1;
+  padding: 1rem;
+}
+
+.hero-img {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-img img {
+  width: 80%;
+  max-width: 400px;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.featured-categories {
+  background: #fff;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.cat-box {
+  background: #e0f2f1;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.cat-box:hover {
+  transform: scale(1.05);
+  background: #b2dfdb;
+}
+
+.cat-box img {
+  width: 50px;
+  margin-bottom: 1rem;
+}
+
+.cat-box span {
+  display: block;
+  font-weight: bold;
+}
+
+.trust {
+  padding: 3rem 2rem;
+  background: #f1f8e9;
+  text-align: center;
+}
+
+.trust-grid {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.trust-grid div {
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.trust-grid h4 {
+  font-size: 2rem;
+  color: #388e3c;
+}

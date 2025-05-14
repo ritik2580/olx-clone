@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OLX Clone</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      background: #002f34;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+    }
+
+    .post-btn {
+      background: #ffce32;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .post-btn:hover {
+      background: #ffd84b;
+    }
+
+    .categories-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    .cat-box {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 120px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .cat-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .cat-box img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    /* Modals */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal h2 {
+      margin-bottom: 20px;
+    }
+
+    .modal .cat-option {
+      padding: 15px;
+      border: 1px solid #ccc;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .modal .cat-option:hover {
+      background: #f0f0f0;
+    }
+
+    .form-field {
+      margin: 15px 0;
+    }
+
+    .form-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-field input, .form-field select, .form-field textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-actions {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .form-actions button {
+      padding: 10px 20px;
+      border: none;
+      background: #002f34;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    /* === MODAL COMMON STYLES === */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  animation: slideIn 0.4s ease;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  color: red;
+}
+
+.modal-content h2 span {
+  color: #007bff;
+}
+
+/* Form Fields */
+.form-field {
+  margin-bottom: 18px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0,123,255,0.5);
+}
+
+/* Submit button */
+.form-actions {
+  text-align: center;
+}
+
+.form-actions button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-actions button:hover {
+  background-color: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes slideIn {
+  from {transform: translateY(-20px);}
+  to {transform: translateY(0);}
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>OLX Clone</h2>
+    <button class="post-btn" onclick="openCategory()">Post Your Ad Now</button>
+  </header>
+
+  <section class="categories-grid" data-aos="fade-up">
+    <div class="cat-box" onclick="openForm('Cars')">
+      <img src="https://cdn-icons-png.flaticon.com/512/743/743007.png" />
+      <span>Cars</span>
+    </div>
+    <div class="cat-box" onclick="alert('Mobiles form coming soon!')">
+      <img src="https://cdn-icons-png.flaticon.com/512/854/854866.png" />
+      <span>Mobiles</span>
+    </div>
+    <div class="cat-box" onclick="alert('Properties form coming soon!')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046844.png" />
+      <span>Properties</span>
+    </div>
+    <div class="cat-box" onclick="alert('Electronics form coming soon!')">
+      <img src="https://cdn-icons-png.flaticon.com/512/3659/3659899.png" />
+      <span>Electronics</span>
+    </div>
+  </section>
+
+  <!-- Category Selection Modal -->
+  <div class="modal" id="categoryModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('categoryModal')">&times;</span>
+      <h2>Select Category</h2>
+      <div class="cat-option" onclick="openForm('Cars')">Cars</div>
+      <div class="cat-option" onclick="alert('Mobiles form coming soon!')">Mobiles</div>
+      <div class="cat-option" onclick="alert('Properties form coming soon!')">Properties</div>
+      <div class="cat-option" onclick="alert('Electronics form coming soon!')">Electronics</div>
+    </div>
+  </div>
+
+  <!-- Posting Form Modal -->
+  <div class="modal" id="formModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('formModal')">&times;</span>
+      <h2>Post Your Ad - <span id="selectedCategory">Cars</span></h2>
+
+      <div class="form-field">
+        <label>Brand *</label>
+        <input type="text" placeholder="e.g. Maruti Suzuki" />
+      </div>
+      <div class="form-field">
+        <label>Year *</label>
+        <input type="number" placeholder="e.g. 2022" />
+      </div>
+      <div class="form-field">
+        <label>Fuel *</label>
+        <select>
+          <option>CNG</option>
+          <option>Diesel</option>
+          <option>Electric</option>
+          <option>LPG</option>
+          <option>Petrol</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Transmission *</label>
+        <select>
+          <option>Manual</option>
+          <option>Automatic</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>KMs Driven *</label>
+        <input type="number" />
+      </div>
+      <div class="form-field">
+        <label>Ad Title *</label>
+        <input type="text" maxlength="70" placeholder="e.g. Swift 2022 - Single Owner" />
+      </div>
+      <div class="form-field">
+        <label>Description *</label>
+        <textarea maxlength="4096" rows="4" placeholder="Include condition, reason for selling..."></textarea>
+      </div>
+      <div class="form-field">
+        <label>Price *</label>
+        <input type="number" placeholder="₹" />
+      </div>
+      <div class="form-field">
+        <label>Upload Photos (up to 20)</label>
+        <input type="file" multiple />
+      </div>
+      <div class="form-field">
+        <label>Location *</label>
+        <input type="text" placeholder="State / City" />
+      </div>
+      <div class="form-field">
+        <label>Phone Number *</label>
+        <input type="tel" placeholder="+91..." />
+      </div>
+
+      <div class="form-actions">
+        <button>POST NOW</button>
+      </div>
+    </div>
+  </div>
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    function openCategory() {
+      document.getElementById('categoryModal').style.display = 'flex';
+    }
+
+    function openForm(category) {
+      document.getElementById('selectedCategory').innerText = category;
+      document.getElementById('categoryModal').style.display = 'none';
+      document.getElementById('formModal').style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    AOS.init();
+  </script>
+  
+  
+</body>
+</html>
